@@ -36,3 +36,16 @@ function playRound(humanChoice, computerChoice) {
     humanScore++;
   }
 }
+
+function playGame() {
+  let rounds = 5;
+  do {
+    playRound(getHumanChoice(), getComputerChoice());
+  } while (--rounds);
+
+  console.log(
+    `The game is over! 👱‍♂️Player score: ${humanScore} x 🖥️Computer score: ${computerScore}`
+  );
+}
+
+playGame();

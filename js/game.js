@@ -37,15 +37,24 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
-function playGame() {
-  let rounds = 5;
-  do {
-    playRound(getHumanChoice(), getComputerChoice());
-  } while (--rounds);
+// function playGame() {
+//   let rounds = 5;
+//   do {
+//     playRound(getHumanChoice(), getComputerChoice());
+//   } while (--rounds);
 
-  console.log(
-    `The game is over! 👱‍♂️Player score: ${humanScore} x 🖥️Computer score: ${computerScore}`
-  );
-}
+//   console.log(
+//     `The game is over! 👱‍♂️Player score: ${humanScore} x 🖥️Computer score: ${computerScore}`
+//   );
+// }
 
-playGame();
+// playGame();
+
+const buttons = document.querySelectorAll("button[data-move]");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const humanChoice = e.currentTarget.dataset.move;
+    playRound(humanChoice, getComputerChoice());
+  });
+});

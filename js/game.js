@@ -15,12 +15,16 @@ function getHumanChoice() {
   return humanChoice;
 }
 
-let humanScore = 0;
-let computerScore = 0;
+const score = {
+  player: 0,
+  computer: 0,
+};
+
+const resultScreen = document.querySelector(".result-screen");
 
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    console.log(`It's a tie, you both chose ${humanChoice}`);
+    resultScreen.textContent = `It's a tie, you both chose ${humanChoice}`;
     return;
   }
 
@@ -29,11 +33,11 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "paper" && computerChoice === "scissors") ||
     (humanChoice === "scissors" && computerChoice === "rock")
   ) {
-    console.log(`You lose, because ${computerChoice} beats ${humanChoice}!`);
-    computerScore++;
+    resultScreen.textContent = `You lose, because ${computerChoice} beats ${humanChoice}!`;
+    score.computer++;
   } else {
-    console.log(`You win, because ${humanChoice} beats ${computerChoice}!`);
-    humanScore++;
+    resultScreen.textContent = `You win, because ${humanChoice} beats ${computerChoice}!`;
+    score.player++;
   }
 }
 

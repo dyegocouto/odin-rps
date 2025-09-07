@@ -20,6 +20,14 @@ const score = {
   computer: 0,
 };
 
+const scoreboard = document.querySelector(".scoreboard");
+scoreboard.textContent = `Player: ${score.player} x Computer: ${score.computer}`;
+
+function updateScoreboard(winner) {
+  score[winner]++;
+  scoreboard.textContent = `Player: ${score.player} x Computer: ${score.computer}`;
+}
+
 const resultScreen = document.querySelector(".result-screen");
 
 function playRound(humanChoice, computerChoice) {
@@ -34,10 +42,10 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "scissors" && computerChoice === "rock")
   ) {
     resultScreen.textContent = `You lose, because ${computerChoice} beats ${humanChoice}!`;
-    score.computer++;
+    updateScoreboard("computer");
   } else {
     resultScreen.textContent = `You win, because ${humanChoice} beats ${computerChoice}!`;
-    score.player++;
+    updateScoreboard("player");
   }
 }
 

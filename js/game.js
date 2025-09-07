@@ -1,10 +1,12 @@
+const resultScreen = document.querySelector(".result-screen");
+const scoreboard = document.querySelector(".scoreboard");
+const buttons = document.querySelectorAll("button[data-move]");
+
 function getComputerChoice() {
   return ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
 }
 
 function printRoundWinner(winner, computerChoice, playerChoice) {
-  const resultScreen = document.querySelector(".result-screen");
-
   if (winner === "draw") {
     resultScreen.textContent = `It's a tie, because you both chose ${computerChoice}`;
   } else if (winner === "computer") {
@@ -14,7 +16,6 @@ function printRoundWinner(winner, computerChoice, playerChoice) {
   }
 }
 
-const scoreboard = document.querySelector(".scoreboard");
 const score = { computer: 0, player: 0 };
 function printScoreboard(winner) {
   if (winner) score[winner]++;
@@ -22,26 +23,38 @@ function printScoreboard(winner) {
   scoreboard.textContent = `👱‍♂️ Player: ${score.player} x 🖥️ Computer: ${score.computer}`;
 }
 
-function playRound(computerChoice, playerChoice) {
-  let roundWinner = "";
+function gameOver() {
+  buttons.forEach((button) => {
+    button.disabled = true;
+  });
 
+  resultScreen.textContent = `Game over!`;
+}
+
+function getRoundWinner(computerChoice, playerChoice) {
   if (computerChoice === playerChoice) {
-    roundWinner = "draw";
+    return "draw";
   } else if (
     (computerChoice === "rock" && playerChoice === "paper") ||
     (computerChoice === "paper" && playerChoice === "scissors") ||
     (computerChoice === "scissors" && playerChoice === "rock")
   ) {
-    roundWinner = "player";
+    return "player";
   } else {
-    roundWinner = "computer";
+    return "computer";
   }
-
-  printRoundWinner(roundWinner, computerChoice, playerChoice);
-  printScoreboard(roundWinner);
 }
 
-const buttons = document.querySelectorAll("button[data-move]");
+let roundsLeft = 5;
+
+function playRound(computerChoice, playerChoice) {
+  const roundWinner = getRoundWinner(computerChoice, playerChoice);
+  printRoundWinner(roundWinner, computerChoice, playerChoice);
+  printScoreboard(roundWinner);
+
+  roundsLeft--;
+  if (!roundsLeft) gameOver();
+}
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {

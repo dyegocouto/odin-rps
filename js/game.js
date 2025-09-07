@@ -1,72 +1,53 @@
-const CHOICES = ["rock", "paper", "scissors"];
-
 function getComputerChoice() {
-  return CHOICES[Math.floor(Math.random() * CHOICES.length)];
+  return ["rock", "paper", "scissors"][Math.floor(Math.random() * 3)];
 }
 
-function getHumanChoice() {
-  let humanChoice = "";
-  do {
-    humanChoice = prompt(
-      "Please, choose: rock, paper, or scissors?"
-    ).toLowerCase();
-  } while (!CHOICES.includes(humanChoice));
+function printRoundWinner(winner, computerChoice, playerChoice) {
+  const resultScreen = document.querySelector(".result-screen");
 
-  return humanChoice;
+  if (winner === "draw") {
+    resultScreen.textContent = `It's a tie, because you both chose ${computerChoice}`;
+  } else if (winner === "computer") {
+    resultScreen.textContent = `Computer wins, because ${computerChoice} beats ${playerChoice}`;
+  } else {
+    resultScreen.textContent = `Player wins, because ${playerChoice} beats ${computerChoice}`;
+  }
 }
-
-const score = {
-  player: 0,
-  computer: 0,
-};
 
 const scoreboard = document.querySelector(".scoreboard");
-scoreboard.textContent = `Player: ${score.player} x Computer: ${score.computer}`;
+const score = { computer: 0, player: 0 };
+function printScoreboard(winner) {
+  if (winner) score[winner]++;
 
-function updateScoreboard(winner) {
-  score[winner]++;
-  scoreboard.textContent = `Player: ${score.player} x Computer: ${score.computer}`;
+  scoreboard.textContent = `👱‍♂️ Player: ${score.player} x 🖥️ Computer: ${score.computer}`;
 }
 
-const resultScreen = document.querySelector(".result-screen");
+function playRound(computerChoice, playerChoice) {
+  let roundWinner = "";
 
-function playRound(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
-    resultScreen.textContent = `It's a tie, you both chose ${humanChoice}`;
-    return;
-  }
-
-  if (
-    (humanChoice === "rock" && computerChoice === "paper") ||
-    (humanChoice === "paper" && computerChoice === "scissors") ||
-    (humanChoice === "scissors" && computerChoice === "rock")
+  if (computerChoice === playerChoice) {
+    roundWinner = "draw";
+  } else if (
+    (computerChoice === "rock" && playerChoice === "paper") ||
+    (computerChoice === "paper" && playerChoice === "scissors") ||
+    (computerChoice === "scissors" && playerChoice === "rock")
   ) {
-    resultScreen.textContent = `You lose, because ${computerChoice} beats ${humanChoice}!`;
-    updateScoreboard("computer");
+    roundWinner = "player";
   } else {
-    resultScreen.textContent = `You win, because ${humanChoice} beats ${computerChoice}!`;
-    updateScoreboard("player");
+    roundWinner = "computer";
   }
+
+  printRoundWinner(roundWinner, computerChoice, playerChoice);
+  printScoreboard(roundWinner);
 }
-
-// function playGame() {
-//   let rounds = 5;
-//   do {
-//     playRound(getHumanChoice(), getComputerChoice());
-//   } while (--rounds);
-
-//   console.log(
-//     `The game is over! 👱‍♂️Player score: ${humanScore} x 🖥️Computer score: ${computerScore}`
-//   );
-// }
-
-// playGame();
 
 const buttons = document.querySelectorAll("button[data-move]");
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    const humanChoice = e.currentTarget.dataset.move;
-    playRound(humanChoice, getComputerChoice());
+    const playerChoice = e.currentTarget.dataset.move;
+    playRound(playerChoice, getComputerChoice());
   });
 });
+
+printScoreboard();

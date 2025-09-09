@@ -22,27 +22,28 @@ body {
 .wrapper {
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 20px;
-  width: clamp(300px, 40%, 700px);
+  width: clamp(300px, 50%, 400px);
+  padding: 15px;
 }
 
 .title {
   text-align: center;
+  font-size: clamp(20px, 5vw, 28px);
 }
 
 .buttons-container {
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   justify-content: space-evenly;
 }
 
 .button {
   border: 1px solid #333;
-  font-size: 1.1rem;
   border-radius: 5px;
-  padding: 4px;
   background-color: rgb(152, 152, 241);
   color: #fbfbfb;
+  font-size: clamp(12px, 5vw, 16px);
+  padding: 4px;
 }
 
 .button:hover {
@@ -57,11 +58,11 @@ body {
 
 .scoreboard {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: clamp(12px, 5vw, 18px);
 }
 
 .result-screen {
-  font-size: 1.05rem;
   text-align: center;
   margin-top: 15px;
+  font-size: clamp(12px, 5vw, 18px);
 }

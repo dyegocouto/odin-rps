@@ -25,3 +25,28 @@ body {
   padding: 20px;
   width: clamp(300px, 40%, 700px);
 }
+
+.title {
+  text-align: center;
+}
+
+.buttons-container {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button {
+  border: 1px solid #333;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  padding: 4px;
+  background-color: rgb(152, 152, 241);
+  color: #fbfbfb;
+}
+
+.button:hover {
+  background-color: rgb(112, 112, 248);
+  transition: 0.2s ease;
+  cursor: pointer;
+}

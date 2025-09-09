@@ -54,3 +54,14 @@ body {
 .button:disabled {
   opacity: 50%;
 }
+
+.scoreboard {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.result-screen {
+  font-size: 1.05rem;
+  text-align: center;
+  margin-top: 15px;
+}

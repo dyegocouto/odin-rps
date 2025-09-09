@@ -31,8 +31,13 @@ body {
   font-size: clamp(20px, 5vw, 28px);
 }
 
+.description {
+  text-align: center;
+  margin-top: 10px;
+}
+
 .buttons-container {
-  margin: 15px 0;
+  margin-top: 10px;
   display: flex;
   justify-content: space-evenly;
 }
@@ -57,12 +62,13 @@ body {
 }
 
 .scoreboard {
+  margin-top: 10px;
   text-align: center;
   font-size: clamp(12px, 5vw, 18px);
 }
 
 .result-screen {
+  margin-top: 10px;
   text-align: center;
-  margin-top: 15px;
   font-size: clamp(12px, 5vw, 18px);
 }
